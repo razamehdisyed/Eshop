@@ -1,0 +1,32 @@
+[
+    {
+        "name": "sandisk memory card",
+        "price": "45.89",
+        "description": "a good quality memory card with ultra fast speed",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "",
+            "url": ""
+        }],
+        "category": "Electronics",
+        "seller": "Ebay",
+        "stock": 50,
+        "numofReviews": 32,
+        "reviews": []
+    },
+    {
+        "name": "Dell laptop",
+        "price": "399.99",
+        "description": "Latest laptop with fast processor",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "",
+            "url": ""
+        }],
+        "category": "Laptops",
+        "seller": "Amazon",
+        "stock": 25,
+        "numofReviews": 24,
+        "reviews": []
+    }
+]
