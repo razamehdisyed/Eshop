@@ -1,9 +1,10 @@
 const ErrorHandler = require('../utils/errorHandler')
 
-module.exports = (req, res, next) => {
+module.exports = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500
     
     if(process.env.NODE_ENV === 'DEVELOPMENT') {
+        
         res.status(err.statusCode).json({
             success: false,
             error: err,
@@ -11,8 +12,8 @@ module.exports = (req, res, next) => {
             stack: err.stack
         })
     }
-
-    if(process.env.NODE_ENV === 'PRODUCTION') {
+    
+    else {
         let error = { ...err }
         error.message = err.message
 
@@ -25,6 +26,24 @@ module.exports = (req, res, next) => {
 
         if (err.name === 'ValidationError') {
             const message = Object.values(err.errors).map(value=>value.message)
+            error = new ErrorHandler(message, 400)
+        }
+        //handling mongoose duplicate key error
+
+        if(error.code === 11000) {
+            const message = `The entered ${Object.keys(err.keyValue)} aleady exists`
+            error = new ErrorHandler(message, 400)
+        }
+        // handling wrong JWT error
+
+        if (err.name === 'JsonWebTokenError') {
+            const message = 'JSON Web Token is invalid. Try again'
+            error = new ErrorHandler(message, 400)
+        }
+        // handling Expired JWT error
+
+        if (err.name === 'TokenExpiredError') {
+            const message = 'JSON Web Token is expired. Try again'
             error = new ErrorHandler(message, 400)
         }
 
