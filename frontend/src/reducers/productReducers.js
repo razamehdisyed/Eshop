@@ -6,7 +6,7 @@ import {
     } 
 from '../constants/productConstants'
 
-export const productsReducer = (state = { products: [] }, action => {
+export const productsReducer = (state = { products: [] }, action) => {
 
     switch(action.type) {
 
@@ -35,4 +35,4 @@ export const productsReducer = (state = { products: [] }, action => {
         default:
             return state;
     }
-})
+}
